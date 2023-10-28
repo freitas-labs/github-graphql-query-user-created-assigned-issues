@@ -1,5 +1,4 @@
 import 'dotenv/config';
-import sum from './sum';
 import { createdBy, assigneeTo } from './issues';
 import { IssueInfo, IssueState } from './data';
 
@@ -32,5 +31,3 @@ assigneeTo(
 		console.log(element);
 	}
 });
-
-console.log(sum(40, 2));
