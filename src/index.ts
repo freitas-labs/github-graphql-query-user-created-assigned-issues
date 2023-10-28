@@ -2,30 +2,27 @@ import 'dotenv/config';
 import { createdBy, assigneeTo } from './issues';
 import { IssueInfo, IssueState } from './data';
 
-console.log(process.env.GITHUB_ACCESS_TOKEN);
+async function getAllIssues(user: string): Promise<IssueInfo[]> {
+	const createdByResult: IssueInfo[] = await createdBy(
+		process.env.GITHUB_ACCESS_TOKEN ?? '',
+		user,
+		IssueState.Open
+	);
 
-createdBy(
-	process.env.GITHUB_ACCESS_TOKEN ?? '',
-	'freitzzz',
-	IssueState.Open
-).then((result: IssueInfo[]) => {
-	console.log('\n\ncreatedBy');
-	console.log('length = ' + result.length);
+	const assigneeToResult: IssueInfo[] = await assigneeTo(
+		process.env.GITHUB_ACCESS_TOKEN ?? '',
+		user,
+		IssueState.Open
+	);
 
-	for (let index = 0; index < result.length; index++) {
-		const element: IssueInfo = result[index];
-		console.log(element);
-	}
-});
+	console.log(`createdBy => ${createdByResult.length}`);
+	console.log(`assigneeTo => ${assigneeToResult.length}`);
 
-assigneeTo(
-	process.env.GITHUB_ACCESS_TOKEN ?? '',
-	'freitzzz',
-	IssueState.Open
-).then((result: IssueInfo[]) => {
-	console.log('\nassigneeTo');
-	console.log('length = ' + result.length);
+	return createdByResult.concat(assigneeToResult);
+}
 
+getAllIssues('freitzzz').then((result) => {
+	console.log(`getAllIssues => ${result.length}`);
 	for (let index = 0; index < result.length; index++) {
 		const element = result[index];
 		console.log(element);
