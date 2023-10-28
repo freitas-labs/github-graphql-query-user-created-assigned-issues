@@ -52,5 +52,8 @@
 		"tsup": "^6.7.0",
 		"typedoc": "^0.24.6",
 		"typescript": "^5.0.4"
+	},
+	"dependencies": {
+		"dotenv": "^16.3.1"
 	}
 }
