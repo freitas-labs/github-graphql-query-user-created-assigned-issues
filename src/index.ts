@@ -1,7 +1,6 @@
 import 'dotenv/config';
 import sum from './sum';
 import { createdBy, assigneeTo } from './issues';
-import { GraphQlQueryResponseData } from '@octokit/graphql/dist-types/types';
 import { IssueInfo, IssueState } from './data';
 
 console.log(process.env.GITHUB_ACCESS_TOKEN);
@@ -10,13 +9,12 @@ createdBy(
 	process.env.GITHUB_ACCESS_TOKEN ?? '',
 	'freitzzz',
 	IssueState.Open
-).then((result: GraphQlQueryResponseData) => {
+).then((result: IssueInfo[]) => {
 	console.log('\n\ncreatedBy');
-	console.log(result);
+	console.log('length = ' + result.length);
 
-	const edges = result.search?.edges;
-	for (let index = 0; index < edges.length; index++) {
-		const element = edges[index] as IssueInfo;
+	for (let index = 0; index < result.length; index++) {
+		const element: IssueInfo = result[index];
 		console.log(element);
 	}
 });
@@ -25,13 +23,12 @@ assigneeTo(
 	process.env.GITHUB_ACCESS_TOKEN ?? '',
 	'freitzzz',
 	IssueState.Open
-).then((result: GraphQlQueryResponseData) => {
+).then((result: IssueInfo[]) => {
 	console.log('\nassigneeTo');
-	console.log(result);
+	console.log('length = ' + result.length);
 
-	const edges = result.search?.edges;
-	for (let index = 0; index < edges.length; index++) {
-		const element = edges[index] as IssueInfo;
+	for (let index = 0; index < result.length; index++) {
+		const element = result[index];
 		console.log(element);
 	}
 });
