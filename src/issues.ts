@@ -87,6 +87,7 @@ async function searchIssuesAfterCursor(
                           title
                           url
 						  number
+						  id
                           repository {
                             name
                           }
