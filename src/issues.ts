@@ -85,7 +85,8 @@ async function searchIssuesAfterCursor(
                         ... on Issue {
                           createdAt
                           title
-                          url,
+                          url
+						  number
                           repository {
                             name
                           }

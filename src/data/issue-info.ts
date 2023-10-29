@@ -2,6 +2,7 @@ export class IssueInfo {
 	createdAt: string | undefined;
 	title: string | undefined;
 	url: string | undefined;
+	number: string | undefined;
 	repository: Repository | undefined;
 }
 
